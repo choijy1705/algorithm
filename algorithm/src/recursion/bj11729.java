@@ -3,46 +3,24 @@ import java.util.*;
 public class bj11729 {
 	static Scanner sc = new Scanner(System.in);
 	static int N;
+	static StringBuilder sb = new StringBuilder();
+	static int cnt=0;
 	public static void main(String[] args) {
 		N = sc.nextInt(); // ÀÌµ¿È½¼ö
-		
-		Stack<Integer> one = new Stack<>();
-		Stack<Integer> two = new Stack<>();
-		Stack<Integer> three = new Stack<>();
-		
-		
-		for(int i=7;i>=1;i--) {
-			one.push(i);
-		}
-		
-		move(one, two,three, 0);
-
+		hanoi(N, 1, 2, 3);
+		System.out.println(cnt);
+		System.out.println(sb);
+	
 	}
-	private static void move(Stack one, Stack two, Stack three, int cnt) {
-		
-		if(cnt == N) {
-			return;
+	private static void hanoi(int n, int from, int by, int to) {
+		cnt++;
+		if(n ==1) {
+			sb.append(from + " " + to + "\n");
+		}else {
+			hanoi(n-1, from, to, by);
+			sb.append(from + " " + to + "\n");
+			hanoi(n-1, by, from, to);
 		}
-		
-		if(three.size() == 7) {
-			return;
-		}
-		
-		if(two.isEmpty() && three.isEmpty()) {
-			three.push(one.pop());
-			System.out.println("1 3");
-			move(one, two, three, cnt +1);
-		}else if(two.isEmpty()) {
-			two.push(one.pop());
-			System.out.println("1 2");
-			move(one, two, three, cnt+1);
-		}else if(three.isEmpty()) {
-			three.push(one.pop());
-			System.out.println("1 3");
-			move(one,two,three, cnt+1);	
-		}
-		
 		
 	}
-
 }
