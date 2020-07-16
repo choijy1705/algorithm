@@ -1,35 +1,32 @@
 package string;
-import java.util.*;
+import java.io.*;
 
+ 
 public class bj1157 {
-	static Scanner sc = new Scanner(System.in);
-	static String s;
-	public static void main(String[] args) {
-		s =sc.next();
-		
-		s = s.toUpperCase();
-		
-		Map<Character,Integer> map = new HashMap<>();
-		
-		for(int i=0;i<s.length();i++) {
-			map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0)+1);
-		}
-		
-		Character[] ch = new Character[map.size()];
-		int i=0;
-		
-		List<Character> keySetList = new ArrayList<>(map.keySet());
-		
-		Collections.sort(keySetList,(o1,o2) -> (map.get(o1).compareTo(map.get(o2))));
-		
-		
-		
-		if(map.size() >1 && (map.get(keySetList.get(keySetList.size()-1)) == map.get(keySetList.get(keySetList.size()-2)))) {
-			System.out.println("?");
-		}else {
-			System.out.println(keySetList.get(keySetList.size()-1));
-		}
-
-	}
-
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String s = br.readLine();
+        int[] arr = new int[26];
+        
+        int len = s.length();
+ 
+        // 각 글자 갯수를 arr 배열에 저장
+        for(int i=0; i<len; i++) {
+            int idx = Character.toLowerCase(s.charAt(i)) - 'a';
+            arr[idx]++;
+        }
+ 
+        int max = -1;
+        char answer = '?';
+ 
+        for(int i=0; i<26; i++) {
+            if(arr[i] > max) {
+                max = arr[i];
+                answer = (char) (i+65);
+            } else if(arr[i] == max)
+                answer = '?';
+        }
+ 
+        System.out.println(answer);
+    }
 }
