@@ -1,34 +1,33 @@
 package math;
-import java.util.*;
-public class bj1011 {
-	static Scanner sc = new Scanner(System.in);
-	static int C;
-	static long x, y;
+import java.util.Scanner;
 
+public class bj1011 {
 	public static void main(String[] args) {
-		C = sc.nextInt();
-		for(int tc=0;tc<C;tc++) {
-			x = sc.nextLong();
-			y = sc.nextLong();
+    
+		Scanner in = new Scanner(System.in);
+ 
+		int T = in.nextInt();	// 테스트 케이스 
+		
+		for(int i = 0; i < T; i++) {
+        
+			int X = in.nextInt();
+			int Y = in.nextInt();
 			
-			long distance = y-x;
-			if(distance %2 == 0) {
-				distance /= 2;
-			}else {
-				distance = (distance-1)/2;
+			int distance = Y - X;	// 거리
+			
+			int max = (int)Math.sqrt(distance);	// 소수점 버림
+            
+			if(max == Math.sqrt(distance)) {
+				System.out.println(max * 2 - 1);
 			}
-			
-			
-			int sum = 0;
-			int i=1;
-			while( sum < distance) {
-				sum += i;
-				i++;
+			else if(distance <= max * max + max) {
+				System.out.println(max * 2);
 			}
-			
-			System.out.println(i-1);
+			else {
+				System.out.println(max * 2 + 1);
+			}
 			
 		}
-
 	}
 }
+
