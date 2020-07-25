@@ -3,6 +3,7 @@ import java.util.*;
 public class bj9020 {
 	static Scanner sc = new Scanner(System.in);
 	static int C, num;
+	static HashMap<String, Integer> map ;
 	public static void main(String[] args) {
 		C = sc.nextInt();
 		
@@ -18,9 +19,14 @@ public class bj9020 {
 					prime[i*j] = true;
 				}
 			}
-			String s = "";
-			gold(prime, num,s,0,2 );
+			map = new HashMap<>();
+			String s  = "";
+			gold(prime, num,s,0,2);
 			
+			List<String> keySetList = new ArrayList<>(map.keySet());
+			Collections.sort(keySetList, (o1, o2) -> (map.get(o1).compareTo(map.get(o2))));
+			
+			//System.out.println(keySetList.get(0));
 		}
 
 	}
@@ -31,14 +37,19 @@ public class bj9020 {
 		}
 		
 		if(number == 0) {
-			System.out.println(s);
+			String[] sd = s.split(" ");
+			int n = Integer.parseInt(sd[1]) - Integer.parseInt(sd[0]);
+			
+			
+			map.put(s, n);
 			return;
 		}
 		
 		for(int i=b;i<num;i++) {
 			if(!prime[i]) {
-				String sd = s +" " +  i ;
-				gold(prime, number - i,sd,cnt+1,i);
+				String sb = s +" "+ i;
+				System.out.println(sb);
+				gold(prime, number - i,sb,cnt+1,i);
 			}
 		}
 	}
