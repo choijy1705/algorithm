@@ -1,61 +1,47 @@
 package greedy;
 import java.util.*;
+import java.io.*;
 public class bj1931 {
-	static Scanner sc = new Scanner(System.in);
 	static int N;
-	public static void main(String[] args) {
-		N = sc.nextInt();
+	
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		
-		
-		List<Meeting> meet = new ArrayList<>();
-		int max = 0;
-		int start=0;
-		int finish=0;
-		
+		N = Integer.parseInt(st.nextToken());
+		int[][] meeting = new int[N][2];
 		for(int i=0;i<N;i++) {
-			start = sc.nextInt();
-			finish = sc.nextInt();
-			max = Math.max(max, finish);
-			
-			meet.add(new Meeting(start,finish));
+			String s = br.readLine();
+			String[] ar = s.split(" ");
+			meeting[i][0] = Integer.parseInt(ar[0]);
+			meeting[i][1] = Integer.parseInt(ar[1]);
 			
 		}
-		int cnt=0;
-		int time=0;
-		while(time < max) {
-			
-			int min = max;
-			boolean chk = false;
-			for(int i=0;i<meet.size();i++) {
-				if(meet.get(i).start >= time) {
-					min = Math.min(min, meet.get(i).finish);
-					chk = true;
-				}
-			}
-			
-			if(!chk) {
-				break;
-			}
-			cnt++;
-			time = min;
+		
+		Arrays.sort(meeting, new Comparator<int[]>() {
 
+			@Override
+			public int compare(int[] start, int[] end ) {
+				
+				if(start[1] == end[1]) {
+					
+					return Integer.compare(start[0], end[0]);
+				}
+				return Integer.compare(start[1], end[1]);
+			}
+		});
+		int cnt = 0;
+		int end = 0;
+		for(int i= 0;i<N;i++) {
 			
+			if(meeting[i][0] >= end) {
+				end = meeting[i][1];
+				cnt++;
+			}
 		}
 		
 		System.out.println(cnt);
-
+		 
 	}
 
-}
-
-class Meeting{
-
-	int start;
-	int finish;
-	
-	Meeting( int start, int finish){
-
-		this.start = start;
-		this.finish = finish;
-	}
 }

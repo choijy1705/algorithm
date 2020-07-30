@@ -18,11 +18,12 @@ public class bj10828 {
 					System.out.println(stack.peek());
 				}catch(Exception e) {
 					System.out.println(-1);
+					
 				}
 			}else if(s.equals("size")) {
 				System.out.println(stack.size());
 			}else if(s.equals("empty")) {
-				if(s.isEmpty()) {
+				if(stack.isEmpty()) {
 					System.out.println(1);
 				}else {
 					System.out.println(0);
