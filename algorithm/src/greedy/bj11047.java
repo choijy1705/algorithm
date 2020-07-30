@@ -17,7 +17,7 @@ public class bj11047 {
 				result = K/money[i];
 				cnt+= result;
 				K -= result*money[i];
-				System.out.println(K);
+
 			}
 		}
 		
