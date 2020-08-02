@@ -14,17 +14,14 @@ public class bj1874 {
 			
 			while(true) {
 				if(stack.size()>0 && stack.peek() == num) {
-					System.out.println(num + " : " + 1);
 					stack.pop();
 					sb.append("-" + "\n");
 					break;
 				}else if(k<=num) {
-					System.out.println(num + " : " + 2);
 					stack.push(k);
 					sb.append("+"+"\n");
 					k++;
 				}else {
-					System.out.println(num + " : " + 3);
 					chk =true;
 					break;
 				}
