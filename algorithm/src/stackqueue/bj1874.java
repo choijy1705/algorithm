@@ -9,23 +9,36 @@ public class bj1874 {
 		StringBuilder sb = new StringBuilder();
 		boolean chk = false;
 		int k= 1;
-		for(int i=1;i<=n;i++) {
+		for(int i=0;i<n;i++) {
 			int num = sc.nextInt();
 			
-			if(stack.contains(num)) {
-				int p = stack.pop();
-				if(p != num) {
-					chk = true;
+			while(true) {
+				if(stack.size()>0 && stack.peek() == num) {
+					System.out.println(num + " : " + 1);
+					stack.pop();
+					sb.append("-" + "\n");
 					break;
+				}else if(k<=num) {
+					System.out.println(num + " : " + 2);
+					stack.push(k);
+					sb.append("+"+"\n");
+					k++;
 				}else {
-					
+					System.out.println(num + " : " + 3);
+					chk =true;
+					break;
 				}
-				sb.append("-\n");
-			}else {
-				stack.push(k);
-				k++;
-				sb.append("+\n");
 			}
+			
+			if(chk) {
+				break;
+			}
+		}
+		
+		if(chk) {
+			System.out.println("NO");
+		}else {
+			System.out.println(sb.toString());
 		}
 
 	}
