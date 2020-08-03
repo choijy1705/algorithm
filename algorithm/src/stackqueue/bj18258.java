@@ -2,13 +2,13 @@ package stackqueue;
 import java.util.*;
 import java.io.*;
 public class bj18258 {
-	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 	static int n;
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		n = Integer.parseInt(br.readLine());
 		
 		Queue<String> queue = new LinkedList<>();
+		StringBuilder sb = new StringBuilder();
 		for(int i=0;i<n;i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			String s = st.nextToken();
@@ -16,37 +16,37 @@ public class bj18258 {
 				queue.add(st.nextToken());
 			}else if(s.equals("pop")) {
 				if(queue.size()>0) {
-					bw.write(queue.poll());
+					sb.append(queue.poll() + "\n");
 				}else {
-					bw.write(-1);
+					sb.append(-1+"\n");
 				}
 			}else if(s.equals("size")){
-				bw.write(queue.size());
+				sb.append(queue.size()+"\n");
 			}else if(s.equals("empty")) {
 				if(queue.isEmpty()) {
-					bw.write(1);
+					sb.append(1+"\n");
 				}else {
-					bw.write(0);
+					sb.append(0+"\n");
 				}
 			}else if(s.equals("front")) {
 				if(queue.size()>0) {
-					bw.write(queue.peek());
+					sb.append(queue.peek()+"\n");
 				}else {
-					bw.write(-1);
+					sb.append(-1+"\n");
 				}
 			}else if(s.equals("back")) {
 				if(queue.size()>0) {
 					Object[] a = queue.toArray();
 					String str = String.valueOf(a[a.length-1]);
-					bw.write(Integer.parseInt(str));
+					sb.append(Integer.parseInt(str)+"\n");
 				}else {
-					bw.write(-1);
+					sb.append(-1+"\n");
 				}
 				
 			}
 		}
+		System.out.println(sb.toString());
 		br.close();
-		bw.close();
 
 	}
 
