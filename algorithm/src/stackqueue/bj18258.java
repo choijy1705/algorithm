@@ -37,8 +37,8 @@ public class bj18258 {
 			}else if(s.equals("back")) {
 				if(queue.size()>0) {
 					Object[] a = queue.toArray();
-					String str = String.valueOf(a[a.length-1]);
-					sb.append(Integer.parseInt(str)+"\n");
+					
+					sb.append(a[a.length-1]+"\n");
 				}else {
 					sb.append(-1+"\n");
 				}
