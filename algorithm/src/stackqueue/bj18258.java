@@ -5,15 +5,18 @@ public class bj18258 {
 	static int n;
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		n = Integer.parseInt(br.readLine());
 		
 		Queue<String> queue = new LinkedList<>();
 		StringBuilder sb = new StringBuilder();
 		for(int i=0;i<n;i++) {
-			StringTokenizer st = new StringTokenizer(br.readLine());
-			String s = st.nextToken();
+			String st = br.readLine();
+			String[] arr = st.split(" ");
+			String s = arr[0];
+			
 			if(s.equals("push")) {
-				queue.add(st.nextToken());
+				queue.add(arr[1]);
 			}else if(s.equals("pop")) {
 				if(queue.size()>0) {
 					sb.append(queue.poll() + "\n");
@@ -45,9 +48,9 @@ public class bj18258 {
 				
 			}
 		}
-		System.out.println(sb.toString());
+		bw.write(sb.toString());
 		br.close();
-
+		bw.close();
 	}
 
 }
