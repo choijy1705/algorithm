@@ -35,6 +35,7 @@ public class bj1780 {
 		int l = paper.length;
 		
 		int num = Integer.parseInt(paper[0][0]);
+		String[][] newpaper; 
 		boolean chk = false;
 		for(int i=0;i<l;i++) {
 			for(int j=0;j<l;j++) {
@@ -48,11 +49,11 @@ public class bj1780 {
 			int[] dx = {0,0,0,l/3,l/3,l/3,2*l/3,2*l/3,2*l/3};
 			int[] dy = {0,l/3, 2*l/3,0,l/3, 2*l/3,0,l/3, 2*l/3};
 			
-			int n = l/3;
+			l = l/3;
 			for(int k=0;k<9;k++) {
-				String[][] newpaper = new String[n][n];
-				for(int i=0;i<n;i++) {
-					for(int j=0;j<n;j++) {
+				newpaper = new String[l][l];
+				for(int i=0;i<l;i++) {
+					for(int j=0;j<l;j++) {
 						newpaper[i][j] = paper[i+dx[k]][j+dy[k]];
 					}
 				}
