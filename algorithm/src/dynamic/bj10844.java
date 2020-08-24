@@ -1,23 +1,32 @@
 package dynamic;
-import java.util.*;
+import java.util.Scanner;
+
 public class bj10844 {
-	static Scanner sc = new Scanner(System.in);
-	static int N;
-	public static void main(String[] args) {
-		N = sc.nextInt();
-		
-		
-		
-		long[] dp = new long[N+1];
-		dp[0]=0;
-		dp[1]= 9;
-		for(int i=2;i<=N;i++) {
-			dp[i] = (dp[i-1]*2 -i)%1000000000;
-		}
-		System.out.println(dp[N]);
-		
-		
+ 
+    public static void main(String[] args) {
 
-	}
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        long dp[][] = new long[n+1][10];
+        for(int i=0;i<=9;i++) {
+            dp[1][i] = 1;
+        }
+         
+        for(int i=2; i<=n; i++) {
+            for(int j=0;j<10;j++) {
+                if(j==0) dp[i][j] = dp[i-1][1]%1000000000;
+                else if(j==9) dp[i][j] = dp[i-1][8]%1000000000;
+                else dp[i][j] = (dp[i-1][j-1] + dp[i-1][j+1])%1000000000;
+            }
+        }
+        long result=0;
+        for(int i=1;i<10;i++) {
+            result += dp[n][i];
+        }
+        System.out.println(result%1000000000); 
 
+         
+    }
+ 
 }
+
