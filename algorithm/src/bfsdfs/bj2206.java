@@ -1,79 +1,105 @@
 package bfsdfs;
 import java.util.*;
-public class bj2206 {
-	static Scanner sc = new Scanner(System.in);
-	static int N,M;
-	static int[] dx = {-1,1,0,0};
-	static int[] dy = {0,0,-1,1};
-	static int result = Integer.MAX_VALUE;
-	public static void main(String[] args) {
-		N = sc.nextInt();
-		M = sc.nextInt();
-		
-		int[][] map = new int[N][M];
-		
-		for(int i=0;i<N;i++) {
-			String s =sc.next();
-			String[] arr = s.split("");
-			
-			for(int j=0;j<M;j++) {
-				map[i][j]=Integer.parseInt(arr[j]);
-			}
-		}
-		
-		boolean[][] visit = new boolean[N][M];
-		Point po = new Point(0,0);
-		dfs(po,visit, map, 0,0);
-		if(result == Integer.MAX_VALUE) {
-			System.out.println(-1);
-		}else {
-			System.out.println(result);
-		}
-		
-
-	}
-	private static void dfs(Point p, boolean[][] visit, int[][] map,int breakwall,int cnt) {
-		if(p.x ==N-1 && p.y == M-1) {
-			
-			result = Math.min(result, cnt+1);
-			return;
-		}
-		
-		if(visit[p.x][p.y]) {
-			return;
-		}
-
-		
-		for(int i=0;i<4;i++) {
-			if(p.x+dx[i] >=0 && p.x+dx[i]<N && p.y+dy[i]>=0 && p.y+dy[i] <M) {
-				
-				if(map[p.x+dx[i]][p.y+dy[i]] == 0) {
-					Point newp = new Point(p.x+dx[i],p.y+dy[i]);
-					visit[p.x][p.y]= true;
-					dfs(newp, visit, map, breakwall, cnt+1);
-					visit[p.x][p.y] = false;
-				}else if(map[p.x+dx[i]][p.y+dy[i]] == 1&& breakwall == 0) {
-					
-					Point newp = new Point(p.x+dx[i],p.y+dy[i]);
-					visit[p.x][p.y]= true;
-					dfs(newp, visit, map, breakwall+1, cnt+1);
-					visit[p.x][p.y] = false;
-				}
-			}
-			
-		}
-		
-		
-	}
-	
-}
-
 class Point{
 	int x;
 	int y;
-	
-	Point(int x, int y){
+	int z;
+	int dis;
+	public Point(int x,int y,int dis,int z) {
 		this.x = x;
 		this.y = y;
+		this.z = z;
+		this.dis = dis;
 	}
+}
+public class bj2206 {
+	static int node [][];
+	static int check[][];
+	static int n,m,ans;
+	static int dy[] = {1,-1,0,0};
+	static int dx[] = {0,0,1,-1};
+	public static void bfs(int a,int b) {
+		Queue<Point> queue = new LinkedList();
+		
+		queue.offer(new Point(a,b,1,0));
+			
+		check[a][b] =0;
+		while(!queue.isEmpty()) {
+			Point q = queue.poll();
+			
+			if(q.x==n-1 && q.y==m-1) {
+				ans = q.dis;
+				break;
+			}
+			
+			
+			
+			for(int i=0;i<4;i++) {
+				int x =q.x + dx[i];
+				int y = q.y + dy[i];
+				
+				if(x<0 || y<0|| x>=n ||y>=m)continue;
+
+				if(check[x][y]<=q.z) continue;
+				
+				
+				if(node[x][y]==0) {
+					check[x][y] = q.z;
+					queue.offer(new Point(x,y,q.dis+1,q.z));
+				}
+				else {
+					if(q.z==0) {
+						check[x][y]=q.z+1;
+						queue.offer(new Point(x,y,q.dis+1,q.z+1));
+					}
+				}
+
+			}
+		}
+	
+	}
+	
+
+
+	
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);	
+		
+		n = sc.nextInt();
+		 m = sc.nextInt();
+		
+		node = new int[n][m];
+		check = new int[n][m];
+		
+		for(int i=0;i<n;i++) {
+			String row = sc.next();
+			for(int j=0;j<m;j++) {
+				node[i][j] = row.charAt(j)-'0';
+				Arrays.fill(check[i], Integer.MAX_VALUE);
+			}
+		}
+		node[0][0]=node[n-1][m-1] =0;
+		
+		
+		ans = Integer.MAX_VALUE;
+		
+		bfs(0,0);
+		
+		for(int i=0;i<n;i++) {
+			
+			for(int j=0;j<m;j++) {
+				System.out.print(check[i][j]+" ");
+			}
+			System.out.println();
+		}
+		if(ans == Integer.MAX_VALUE) {
+			System.out.println("-1");
+		}else {
+			System.out.println(ans);
+		}
+	
+		
+	}
+	
 }
