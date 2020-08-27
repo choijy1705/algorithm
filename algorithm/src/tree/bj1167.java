@@ -1,79 +1,70 @@
 package tree;
-// 트리의 지름 찾기
+
 import java.util.*;
-
+ 
 public class bj1167 {
-	static Scanner sc = new Scanner(System.in);
-	static int N;
-	static int len = 0;
-	static Tree[] tree;
-	public static void main(String[] args) {
-		N = sc.nextInt();
-		
-		tree= new Tree[N+1];
-		tree[0] = new Tree(0);
-		
-		for(int i=0;i<N;i++) {
-			int node = sc.nextInt();
-			int link = sc.nextInt();
-			
-			tree[node] = new Tree(node);
-			while(link != -1) {
-				int length = sc.nextInt();
-				tree[node].map.put(link, length);
-				link = sc.nextInt();
-			}	 
-		}
-		
-		
-		boolean[] visit = new boolean[N+1];
-		for(int i=1;i<=N;i++) {
-			bfs(i);
-		}
-		System.out.println(len);
-		
-	}
-	private static void bfs(int node) {
-		Queue<Tree> queue = new LinkedList<>();
-		int length = 0;
-		queue.add(tree[node]);
-		boolean[] visit = new boolean[N+1];
-		
-		
-		while(!queue.isEmpty()) {
-			
-			Tree t =queue.poll();
-			visit[t.no] = true; 
-			
-			Set<Integer> key = t.map.keySet();
-			int max = 0;
-			int nextnode = 0;
-			boolean chk = false;
-			for(int k : key) {
-				if(max < t.map.get(k) && !visit[k]) {
-					chk = true;
-					nextnode = k;
-				}
-			}
-			if(chk) {
-				length += t.map.get(nextnode);
-				queue.add(tree[nextnode]);
-			}
-			
-		}
-		
-		len = Math.max(len, length);
-		
-	}
-	
-
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<Edge> [] list = new ArrayList[n+1];
+        int[] dist = new int[n+1];
+        
+        for(int i=0; i<=n; i++) {
+        	list[i] = new ArrayList<>();
+        }
+            
+ 
+        for(int i=0; i<n; i++) {
+            int x = sc.nextInt();
+            while(true) {
+                int y = sc.nextInt();
+                if(y==-1)
+                    break;
+                int cost = sc.nextInt();
+                list[x].add(new Edge(y, cost));
+            }
+        }
+        
+        dist = bfs(list, 1, n); //가장 긴 길이의 정점 찾기
+        int start = 1;
+        for(int i=2; i<=n; i++)
+            if(dist[start]<dist[i])
+                start = i;
+        
+        dist = bfs(list, start, n); //가장 긴 길이의 정점을 루트로 dist배열 초기화
+        Arrays.sort(dist);
+        System.out.println(dist[n]);//정렬 후 최대값 출력
+    }
+    
+    static int[] bfs(List<Edge>[] list, int start, int n) {
+        boolean [] b = new boolean[n+1];
+        int [] dist = new int[n+1];
+        Queue<Integer> q = new LinkedList<>();
+        q.add(start);
+        b[start] = true;
+ 
+        while(!q.isEmpty()) {
+            int v = q.poll();
+            for(Edge e : list[v]) {
+                int y = e.y;
+                int cost = e.cost;
+                if(!b[y]) {
+                    b[y] = true;
+                    q.add(y);
+                    dist[y] = dist[v]+cost;
+                }
+            }
+        }
+ 
+        return dist;
+    }
 }
-
-class Tree{
-	int no;
-	HashMap<Integer, Integer> map = new HashMap<>();	
-	
-	Tree(int no){
-		this.no = no;
-	}
+class Edge {
+    int y;
+    int cost;
+ 
+    public Edge(int y, int cost) {
+        this.y = y ;
+        this.cost = cost;
+    }
 }
