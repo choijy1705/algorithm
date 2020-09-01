@@ -5,7 +5,7 @@ import java.io.*;
 
 public class bj1967 {
 
-	static Vector<Node>[] vector;
+	static List<Node>[] list;
 	static boolean[] isvisited;
 	static int n;
 
@@ -16,9 +16,9 @@ public class bj1967 {
 
 		n = Integer.parseInt(br.readLine());
 
-		vector = new Vector[n + 1];
+		list = new ArrayList[n + 1];
 		for (int i = 1; i <= n; i++)
-			vector[i] = new Vector<>();
+			list[i] = new ArrayList<>();
 
 		for (int i = 0; i < n - 1; i++) {
 			String[] arr = br.readLine().split(" ");
@@ -26,8 +26,8 @@ public class bj1967 {
 			int B = Integer.parseInt(arr[1]);
 			int W = Integer.parseInt(arr[2]);
 
-			vector[A].add(new Node(B, W));
-			vector[B].add(new Node(A, W));
+			list[A].add(new Node(B, W));
+			list[B].add(new Node(A, W));
 		}
 
 		isvisited = new boolean[n + 1];
@@ -54,8 +54,8 @@ public class bj1967 {
 
 			Node p = q.poll();
 
-			for (int i = 0; i < vector[p.n].size(); i++) {
-				Node node = vector[p.n].get(i);
+			for (int i = 0; i < list[p.n].size(); i++) {
+				Node node = list[p.n].get(i);
 
 				if (!isvisited[node.n]) {
 					int nw = p.weight + node.weight;
