@@ -9,19 +9,19 @@ public class bj1717 {
 		m = sc.nextInt();
 		parent = new int[n+1];
 		
-		for(int i=0;i<n;i++) {
+		for(int i=0;i<=n;i++) {
 			parent[i] = i;
 		}
 		
 		for(int i=0;i<m;i++) {
 			int a = sc.nextInt();
-			int b = sc.nextInt();
-			int c = sc.nextInt();
+			int x = sc.nextInt();
+			int y = sc.nextInt();
 			
 			if(a == 0) {
-				union(b,c);
+				union(x,y);
 			}else {
-				isSameParent(b,c);
+				isSameParent(x,y);
 			}
 			
 		}
@@ -29,7 +29,10 @@ public class bj1717 {
 
 	}
 	private static void isSameParent(int x, int y) {
-		if(parent[x] == parent[y]) {
+		x = find(x);
+		y = find(y);
+		
+		if(x == y) {
 			System.out.println("YES");
 		}else {
 			System.out.println("NO");
@@ -38,15 +41,11 @@ public class bj1717 {
 	}
 	private static void union(int x, int y) {
 		
-		int a = find(x);
-		int b = find(y);
+		x = find(x);
+		y = find(y);
 		
-		if(a<b) {
-			parent[x] = a;
-			parent[y] = a;
-		}else {
-			parent[x] = b;
-			parent[y] = b;
+		if(x != y) {
+			parent[y] = x;
 		}
 		
 		
@@ -54,9 +53,10 @@ public class bj1717 {
 	private static int find(int x) {
 		if(parent[x] == x) {
 			return x;
-		}else {
-			return find(parent[x]);
 		}
+		
+		return parent[x] = find(parent[x]);
+		
 	}
 
 }
