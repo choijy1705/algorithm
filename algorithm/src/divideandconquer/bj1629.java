@@ -1,14 +1,24 @@
 package divideandconquer;
-import java.util.*;
-public class bj1629 {
-	static int a, b, c;
-	static Scanner sc = new Scanner(System.in);
-	public static void main(String[] args) {
-		a = sc.nextInt();
-		b = sc.nextInt();
-		c = sc.nextInt();
-		
-		System.out.println((int)(Math.pow(a, b)%c));
-	}
+import java.util.Scanner;
 
+public class bj1629 {
+	public static void main(String[] ar){
+		Scanner sc = new Scanner(System.in);
+		int A = sc.nextInt();
+		int B = sc.nextInt();
+		int mod = sc.nextInt();
+		
+		long ans = 1; 
+		long multiply = A%mod;
+		
+		while(B>0){
+			if(B%2==1){
+				ans *= multiply;
+				ans%=mod;
+			}
+			multiply = ((multiply%mod)*(multiply%mod))%mod;
+			B/=2;
+		}
+		System.out.print(ans);
+	}
 }

@@ -20,13 +20,9 @@ public class bj10989 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
  
         for (int i = 1; i < 10000; i++) {
-            if (arr[i] > 0) {
-                for (int j = 0; j < arr[i]; j++) {
-
-                    bw.write(Integer.toString(i) + "\n");
-         
-                }
-            }
+           while(0<arr[i]--) {
+        	   bw.write(Integer.toString(i)+"\n");
+           }
         }
         br.close();
         bw.close();
