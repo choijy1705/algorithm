@@ -1,7 +1,7 @@
 package dijkstra;
 import java.util.*;
 
-class Node implements Comparable<Node>{
+ class Node implements Comparable<Node>{
 	
 	int end, weight;
 	
