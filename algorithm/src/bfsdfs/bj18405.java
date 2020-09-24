@@ -5,22 +5,20 @@ class Virus implements Comparable<Virus>{
 	int virus;
 	int x;
 	int y;
-	int time = 0;
+	int time;
 	Virus(int virus,int x, int y,int time){
 		this.virus = virus;
 		this.x = x;
 		this.y = y;
-		this.time = 0;
+		this.time = time;
 	}
 	@Override
-	public int compareTo(Virus v) {
-		
-		if(time == v.time) {
-			return virus - v.virus;
-		}else {
-			return time - v.time;
+	public int compareTo(Virus o) {
+		if(time == o.time) {
+			return virus - o.virus;
 		}
 		
+		return time - o.time;
 	}
 	
 	
@@ -51,12 +49,6 @@ public class bj18405 {
 		X = sc.nextInt();
 		Y = sc.nextInt();
 		bfs(map);
-		for(int i=0;i<N;i++) {
-			for(int j=0;j<N;j++) {
-				System.out.print(map[i][j]);
-			}
-			System.out.println();
-		}
 		
 
 	}
@@ -75,7 +67,6 @@ public class bj18405 {
 		while(!pq.isEmpty()) {
 			
 			Virus v = pq.poll();
-			System.out.println(v.virus);
 			
 			if(v.time == S) {
 				break;
@@ -92,11 +83,12 @@ public class bj18405 {
 				if(map[x][y] == 0 && !visit[x][y]) {
 					visit[x][y] = true;
 					map[x][y] = v.virus;
-					pq.add(new Virus(v.virus, x, y,(v.time+1)));
+					
+					pq.add(new Virus(v.virus, x, y,v.time+1));
 				}
 			}
 		}
-		//System.out.println(map[X-1][Y-1]);
+		System.out.println(map[X-1][Y-1]);
 	}
 
 }
