@@ -7,20 +7,31 @@ public class bj1655 {
 	public static void main(String[] args) {
 		
 		N = sc.nextInt();
-		List<Integer> list = new ArrayList<>();
-		
+		PriorityQueue<Integer> min = new PriorityQueue<>((o1,o2) -> o1 - o2);
+		PriorityQueue<Integer> max = new PriorityQueue<>((o1,o2)->o2-o1);
+		StringBuilder sb = new StringBuilder();
 		
 		for(int i=0;i<N;i++) {
 			int num = sc.nextInt();
-			list.add(num);
-			Collections.sort(list);
 			
-			if(list.size()%2 == 0) {
-				System.out.println(list.get(list.size()/2 -1));
+			if(min.size() == max.size()) {
+				max.add(num);
 			}else {
-				System.out.println(list.get(list.size()/2));
+				min.add(num);
 			}
+			
+			if(!min.isEmpty() && !max.isEmpty()) {
+				if(min.peek() < max.peek()) {
+					int tmp = min.poll();
+					min.add(max.poll());
+					max.add(tmp);
+				}
+			}
+			sb.append(max.peek() + "\n");
+			
+			
 		}
+		System.out.println(sb.toString());
 		
 		
 		
