@@ -3,51 +3,49 @@ import java.util.*;
 public class bj11724 {
 	static Scanner sc = new Scanner(System.in);
 	static int n,m;
-	static int[] parent;
+	static int[][] graph;
+	static boolean[] visited;
 	public static void main(String[] args) {
 		n = sc.nextInt();
 		m=sc.nextInt();
-		
-		parent = new int[n+1];
-		
-		for(int i=1;i<=n;i++) {
-			parent[i] = i;
-		}
-		
+		graph = new int[n+1][n+1];
+		visited = new boolean[n+1];
 		for(int i=0;i<m;i++) {
-			int x = sc.nextInt();
-			int y = sc.nextInt();
+			int a = sc.nextInt();
+			int b = sc.nextInt();
 			
-			union(x,y);
+			graph[a][b] = graph[b][a] = 1;
+			
 		}
 		
-		HashSet<Integer> set = new HashSet<>();
+		int result = 0;
 		
 		for(int i=1;i<=n;i++) {
-			System.out.println(parent[i]);
-			set.add(parent[i]);
+			if(!visited[i]) {
+				dfs(i);
+				result++;
+			}
+			
 		}
-		
-		System.out.println(set.size());
+		System.out.println(result);
 	}
-	private static void union(int x, int y) {
+
+	private static void dfs(int index) {
 		
-		x = find(x);
-		y = find(y);
-		
-		if(x<=y) {
-			parent[y] = x;
+		if(visited[index]) {
+			return;
 		}else {
-			parent[x] = y;
+			visited[index] = true;
+			for(int i=1;i<=n;i++) {
+				if(graph[index][i] == 1) {
+					dfs(i);
+				}
+			}
 		}
 		
-	}
-	private static int find(int x) {
-		if(parent[x] == x) {
-			return x;
-		}
 		
-		return parent[x] = find(parent[x]);
 	}
+	
+	
 
 }
