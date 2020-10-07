@@ -13,13 +13,7 @@ public class bj1010 {
 			if(m == 1) {
 				System.out.println(1);
 			}else {
-				long[] num = new long[m+1];
-				num[0]=1;
-				num[1] = 1;
-				for(int i=2;i<=m;i++) {
-					num[i] = num[i-1]*i;
-				}
-				
+								
 				long[] dp = new long[m+1];
 				
 				dp[n] = 1;
