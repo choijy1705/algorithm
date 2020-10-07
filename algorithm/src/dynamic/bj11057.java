@@ -8,7 +8,7 @@ public class bj11057 {
 		
 		n = sc.nextInt();
 		long[][] dp = new long[n+1][10];
-		for(int i=0;i<9;i++) {
+		for(int i=0;i<=9;i++) {
 			dp[1][i]=1;
 		}
 		
@@ -17,7 +17,7 @@ public class bj11057 {
 				
 				for(int j=0;j<10;j++) {
 					for(int k=0;k<=j;k++) {
-						dp[i][j] += dp[i-1][k];
+						dp[i][j] += dp[i-1][k]%10007;
 					}
 					
 				}
@@ -28,7 +28,7 @@ public class bj11057 {
 		for(int i=0;i<10;i++) {
 			result += dp[n][i];
 		}
-		System.out.println(result+1);
+		System.out.println(result%10007);
 
 	}
 
