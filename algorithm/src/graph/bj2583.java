@@ -47,16 +47,16 @@ public class bj2583 {
 	
 	static void area(int a, int b, boolean[][] map) {
 		
-		Queue<Point> queue = new LinkedList<>();
+		Queue<Point2> queue = new LinkedList<>();
 		int[] dx = {-1,1,0,0};
 		int[] dy = {0,0,-1,1};
-		queue.add(new Point(a,b));
+		queue.add(new Point2(a,b));
 		map[a][b] = true;
 		int result = 1;
 		
 		while(!queue.isEmpty()) {
 			
-			Point p = queue.poll();
+			Point2 p = queue.poll();
 			
 			for(int i=0;i<4;i++) {
 				int nx = p.x+ dx[i];
@@ -69,7 +69,7 @@ public class bj2583 {
 				if(!map[nx][ny]) {
 					map[nx][ny] = true;
 					result++;
-					queue.add(new Point(nx,ny));
+					queue.add(new Point2(nx,ny));
 				}
 				
 				
@@ -81,10 +81,10 @@ public class bj2583 {
 
 }
 
-class Point{
+class Point2{
 	int x;
 	int y;
-	Point(int x, int y){
+	Point2(int x, int y){
 		this.x = x;
 		this.y =y;
 	}
