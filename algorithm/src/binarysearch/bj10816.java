@@ -6,9 +6,10 @@ public class bj10816 {
 	static int n, m;
 	static StringBuilder sb = new StringBuilder();
 	static int cnt;
+	static int[] arr;
 	public static void main(String[] args) {
 		n = sc.nextInt();
-		int[] arr = new int[n];
+		arr = new int[n];
 		for(int i=0;i<n;i++) {
 			arr[i] = sc.nextInt();
 		}
@@ -16,48 +17,55 @@ public class bj10816 {
 		Arrays.sort(arr);
 		
 		m = sc.nextInt();
-		
+		StringBuilder sb = new StringBuilder();
 		for(int i=0;i<m;i++) {
-			cnt = 0;
-			binarySearch(arr, 0, n-1,sc.nextInt());
+			int num = sc.nextInt();
+			sb.append(check(num)).append(" ");
 		}
 		System.out.println(sb.toString());
 		
 
 	}
-	private static void binarySearch(int[] arr, int low, int high, int target) {
-		if(low > high) {
-			sb.append(cnt + " ");
-			return;
-		}
-		
-		int mid = (low+high)/2;
-		
-		if(target < arr[mid]) {
-			binarySearch(arr, low, mid-1, target);
-		}else if(arr[mid] < target) {
-			binarySearch(arr, mid+1, high,target);
-		}else {
-			cnt++;
-			int k = 1;
-			boolean chk = true;
-			while(chk) {
-				chk = false;
-				if(mid+k < arr.length && target == arr[mid + k] ) {
-					chk = true;
-					cnt++;
-				}
-				
-				if(mid-k>=0 && target == arr[mid - k]) {
-					chk = true;
-					cnt++;
-				}
-				k++;
-			}
-			sb.append(cnt + " ");
-		}
-		
+	private static int check(int num) {
+		int low = lower(num);
+		int high = upper(num);
+		return high - low-1;
 	}
+	private static int upper(int num) {
+		int left=0, right = n;
+		
+		while(left<right) {
+			int mid = (left+right)/2;
+			
+			if(arr[mid] == num) {
+				left = mid+1;
+			}else if(arr[mid] > num) {
+				right = mid;
+			}else {
+				left = mid +1;
+			}
+		}
+		
+		return left+1;
+	}
+	private static int lower(int num) {
+int left=0, right = n;
+		
+		while(left<right) {
+			int mid = (left+right)/2;
+			
+			if(arr[mid] == num) {
+				right = mid;
+			}else if(arr[mid] > num) {
+				right = mid;
+			}else {
+				left = mid +1;
+			}
+		}
+		
+		return right;
+	}
+	
 	
 
 }
