@@ -13,6 +13,7 @@ public class bj2110 {
 		for(int i=0;i<n;i++) {
 			arr[i] = sc.nextInt();
 		}
+		Arrays.sort(arr);
 		
 		int ans = 1;
 		int start =1;
@@ -23,7 +24,6 @@ public class bj2110 {
 
 			if(check(arr, mid, c)) {
 				
-				System.out.println(mid);
 				ans = Math.max(ans, mid);
 				start = mid+1;
 			}else {
