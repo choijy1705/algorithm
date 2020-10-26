@@ -20,9 +20,7 @@ public class bj1107 {
 		for(int i=0;i<6;i++) {
 			
 		}
-		
-		char c = '1';
-		System.out.println(Character.isDigit(c));;
+	
 
 	}
 
