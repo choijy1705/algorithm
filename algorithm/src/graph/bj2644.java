@@ -23,7 +23,6 @@ public class bj2644 {
  
     public static void main(String[] args){
  
-        
         n = sc.nextInt();
 
         p1 = sc.nextInt();
