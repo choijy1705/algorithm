@@ -26,19 +26,18 @@ public class bj1107 {
 
 	}
 	private static void goChannel(int a, int b, String s) {
-		if(b==8) {
+		if(b==7) {
 			return;
 		}
-		
-		s += a+"";
-		
-		int num = Integer.parseInt(s);
-		if(a != 100) {
-			min = Math.min(min, Math.abs(num - n)+s.length());
+		if(a==100) {
+			min = Math.min(min, Math.abs(a-n));
 		}else {
-			min = Math.min(min, Math.abs(num-n));
+
+			s += a+"";
+			int num = Integer.parseInt(s);
+			min = Math.min(min, Math.abs(num - n)+s.length());
+			
 		}
-		
 		
 		for(int i=0;i<list.size();i++) {
 			goChannel(list.get(i),b+1, s);
