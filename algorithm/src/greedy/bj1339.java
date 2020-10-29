@@ -12,6 +12,7 @@ public class bj1339 {
 	static HashMap<Character, Integer> map;
 	static ArrayList<Character> alphabet;
 	static boolean[] selected;
+	
 
 	static int N, max;
 	public static void main(String[] args) throws NumberFormatException, IOException {

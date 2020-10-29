@@ -4,36 +4,48 @@ public class bj1107 {
 	static Scanner sc = new Scanner(System.in);
 	static int n,m;
 	static int min = Integer.MAX_VALUE;
+	static List<Integer> list = new ArrayList<>();
 	public static void main(String[] args) {
 		n = sc.nextInt();
 		m = sc.nextInt();
 		
-		List<Integer> list = new ArrayList<>();
+		
 		for(int i=0;i<=9;i++) {
 			list.add(i);
 		}
 		
 		for(int i=0;i<m;i++) {
-			int a = sc.nextInt();
-			list.remove(a);
+			int idx = sc.nextInt();
+			
+			list.remove((Integer)idx);
 		}
 		
-		for(int i=0;i<6;i++) {
-			StringBuilder sb = new StringBuilder();
-			pick(i,0,sb);
-		}
-	
+		goChannel(100, 0, "");
+		
+		System.out.println(min);
 
 	}
-	private static void pick(int i, int j,StringBuilder sb) {
-		sb.append(i);
+	private static void goChannel(int a, int b, String s) {
+		if(b==8) {
+			return;
+		}
 		
-		int a = Integer.parseInt(sb.toString());
+		s += a+"";
 		
-		min = Math.min(min, Math.abs(n-a));
+		int num = Integer.parseInt(s);
+		if(a != 100) {
+			min = Math.min(min, Math.abs(num - n)+s.length());
+		}else {
+			min = Math.min(min, Math.abs(num-n));
+		}
 		
-		for(int i=0;i<6;)
+		
+		for(int i=0;i<list.size();i++) {
+			goChannel(list.get(i),b+1, s);
+		}
+		
 		
 	}
+	
 
 }
