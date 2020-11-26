@@ -5,20 +5,21 @@ public class bj11657 {
 	static int n,m;
 	public static void main(String[] args) {
 		
-		n = sc.nextInt();
-		m = sc.nextInt();
 		
-		
-		int[][] link = new int[n+1][n+1];
-		for(int i=0;i<m;i++) {
-			int a = sc.nextInt();
-			int b = sc.nextInt();
-			int c = sc.nextInt();
+		int num = 1;
+		for(int i=0;i<30;i++) {
+			System.out.print("[");
+			for(int j=0;j<29;j++) {
+				System.out.print(num + ",");
+				num++;
+			}
+			System.out.print(num);
+			num++;
+			System.out.print("]");
+			System.out.print(",");
 			
-			link[a][b] = c;
+			
 		}
-		
-		
 		
 		
 
