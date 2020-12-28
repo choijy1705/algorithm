@@ -29,12 +29,15 @@ public class bj1992 {
 	}
 	private static void findMinBridge(int[] bridge) {
 		int min = Integer.MAX_VALUE;
-		int index = -1;
+		int index = 0;
 		for(int i=0;i<bridge.length;i++) {
 			if(bridge[i] != 0 && bridge[i] < min) {
 				min = bridge[i];
 				index=i;
 			}
+		}
+		if(min == Integer.MAX_VALUE) {
+			return;
 		}
 		result += min;
 		check[index] = true;
